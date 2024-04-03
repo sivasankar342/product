@@ -16,8 +16,8 @@ class CustomUser(AbstractUser):
 
 class product(models.Model):
    # id=models.IntegerField(primary_key=True)
-    pname=models.CharField(max_length=100)
-    qty=models.IntegerField(default=1)
+    product_name=models.CharField(max_length=100)
+    quantity=models.IntegerField(default=1)
     price=models.DecimalField(max_digits=10,decimal_places=2)
-    img=models.URLField(max_length=100)
+    image=models.URLField(max_length=100)
     parent=models.ForeignKey('self',on_delete=models.CASCADE,null=True,blank=True)

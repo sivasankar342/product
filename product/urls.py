@@ -1,7 +1,7 @@
 """
-URL configuration for product project.
+URL configuration for file project.
 
-The `urlpatterns` list routes URLs to views. For more information please see:
+The urlpatterns list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
 Examples:
 Function views
@@ -16,7 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from productapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('/',views.homepage, name='homepage'),
+    path('registration/', views.registration, name='registration'),
+    path('home/', views.homepage, name='homepage'),
+    path('loginpage/', views.loginpage, name='loginpage'),
+    path('userdashboard/', views.userdashboard, name='userdashboard'),
+    path('dealerdashboard/', views.dealerdashboard, name='dealerdashboard'),
+    path('logoutpage/', views.logoutpage, name='logoutpage'),path('create_product/', views.create_product, name='create_product'),
+    path('productlist/', views.productlist, name='productlist'),
+    path('add_to_wishlist/<int:product_id>/', views.add_to_wishlist, name='add_to_wishlist'),
+    path('wishlist/', views.wishlist, name='wishlist'),
 ]

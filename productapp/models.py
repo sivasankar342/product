@@ -1,23 +1,19 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
-    USER_ROLES = (
-        ('user','User'),
-        ('dealer','Dealer'),
-       
-       
-    )
-   
-    user=models.BooleanField(default=False)
-    dealer=models.BooleanField(default=False)
+    email = models.EmailField(unique=True)
+    is_user = models.BooleanField(default=False)
+    is_dealer = models.BooleanField(default=False)
 
+class Product(models.Model):
+    pname = models.CharField(max_length=100)
+    qty = models.IntegerField(default=1)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    img = models.URLField(max_length=100)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
 
-
-class product(models.Model):
-   # id=models.IntegerField(primary_key=True)
-    product_name=models.CharField(max_length=100)
-    quantity=models.IntegerField(default=1)
-    price=models.DecimalField(max_digits=10,decimal_places=2)
-    image=models.URLField(max_length=100)
-    parent=models.ForeignKey('self',on_delete=models.CASCADE,null=True,blank=True)
+class Wishlist(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)

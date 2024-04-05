@@ -1,31 +1,29 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product List</title>
+    
 </head>
 <body>
     <h1>Product List</h1>
-    <ul>
+    <div class="row">
         {% for product in products %}
-            <li>{{ product.name }}</li>
             <div class="col">
                 <div class="card" style="width: 20rem;">
+                    <img src="{{ product.img }}" class="card-img-top" alt="{{ product.name }}">
                     <div class="card-body">
-                        <h5 class="card-title">{{product.pname }}</h5>
-                        <p class="card-text">{{product.qty }}</p>
-                        <p class="card-text">{{product.price}}</p>
-                      {{product.img}}
-                        <a href="#" class="btn btn-primary">Wishlist</a>
-                        <!-- <img class="card-img-top=" src="{{product.image}}"> -->
-                        <!-- <img src="{{product.image}}" alt=""> -->
-
-                     </div>
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">Price: ${{ product.price }}</p>
+                        <p class="card-text">Quantity: {{ product.qty }}</p>
+                        <a href="{% url 'add_to_wishlist' %}" class="btn btn-primary">Add to Wishlist</a>
+                    </div>
                 </div>
+            </div>
         {% endfor %}
-    </ul>
-   
+    </div>
+    
     
 </body>
 </html>

@@ -19,15 +19,16 @@ from django.urls import path
 from productapp import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('/',views.homepage, name='homepage'),
-    path('registration/', views.registration, name='registration'),
-    path('home/', views.homepage, name='homepage'),
-    path('loginpage/', views.loginpage, name='loginpage'),
-    path('userdashboard/', views.userdashboard, name='userdashboard'),
-    path('dealerdashboard/', views.dealerdashboard, name='dealerdashboard'),
-    path('logoutpage/', views.logoutpage, name='logoutpage'),path('create_product/', views.create_product, name='create_product'),
-    path('productlist/', views.productlist, name='productlist'),
-    path('add_to_wishlist/<int:product_id>/', views.add_to_wishlist, name='add_to_wishlist'),
-    path('wishlist/', views.wishlist, name='wishlist'),
+    path('admin/', admin.site.urls),  # URL for admin site
+    path('', views.registration, name='registration'),  # URL for registration page
+    path('homepage/', views.homepage, name='homepage'),  # URL for homepage
+    path('loginpage/', views.loginpage, name='loginpage'),  # URL for login page
+    path('userdashboard/', views.userdashboard, name='userdashboard'),  # URL for user dashboard
+    path('dealerdashboard/', views.dealerdashboard, name='dealerdashboard'),  # URL for dealer dashboard
+    path('logoutpage/', views.logoutpage, name='logoutpage'),  # URL for logout page
+    path('create_product/', views.create_product, name='create_product'),  # URL for creating a product
+    path('productlist/', views.productlist, name='productlist'),  # URL for list of products
+    path('add_to_wishlist/', views.add_to_wishlist, name='add_to_wishlist'),  # URL for adding product to wishlist
+    path('wishlist/', views.wishlist, name='wishlist'),  # URL for wishlist
+    path('remove_from_wishlist/', views.remove_from_wishlist, name='remove_from_wishlist'),  # URL for removing from wishlist
 ]

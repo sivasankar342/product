@@ -1,19 +1,24 @@
 from django.db import models
-from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 
-class CustomUser(AbstractUser):
-    email = models.EmailField(unique=True)
-    is_user = models.BooleanField(default=False)
+class User(AbstractUser):
+    class Role(models.TextChoices):
+        USERS = 'USERS', 'User'
+        DEALER = 'DEALER', 'Dealer'
+
     is_dealer = models.BooleanField(default=False)
+    role = models.CharField(max_length=6, choices=Role.choices, default=Role.USERS)
 
 class Product(models.Model):
-    pname = models.CharField(max_length=100)
-    qty = models.IntegerField(default=1)
+    name = models.CharField(max_length=100)
+    description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    img = models.URLField(max_length=1000)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+    image = models.CharField(max_length=300,default='')
+    dealer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
 class Wishlist(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product, blank=True) 
+
+    def str(self):
+        return f"Wishlist for {self.user.username}"

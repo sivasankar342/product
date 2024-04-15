@@ -7,14 +7,15 @@
     <title>Product List</title>
 </head>
 <body>
-    <h1>Wishlist</h1>
-    <ul>
-        {% for item in wishlist_items %}
-            <li>
-                <img src="{{ item.image_url }}" alt="{{ item.product }}">
-                {{ item.product }}
-            </li>
-        {% endfor %}
-    </ul>
+    <center>
+        <i><h1 style="color: aqua;">ADD WISHLIST</h1></i>
+         <!-- <p>product name:{{products.pname}}</p> -->
+        <form action="" method="POST">
+            {% csrf_token %}
+           
+            {{add.as_p}}
+            <input type="submit" value="AddWishList">
+        </form>
+    </center>
 </body>
 </html>
